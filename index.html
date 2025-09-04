@@ -1,0 +1,1235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jesus My Lamp & Light Inc. Church</title>
+  <meta name="description" content="Official website of Jesus My Lamp & Light Inc. Church—services, ministries, sermons, events, giving, and contact." />
+
+  <!-- Google Fonts: Gotham (via CDN substitute), Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"><!-- Substitute for Gotham -->
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <style>
+    /* Button Ripple Effect */
+    .btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn .ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      background: rgba(31,87,255,0.18);
+      pointer-events: none;
+    }
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+    /* Card Tilt Effect */
+    .feature-card, .ministry-card, .event-card, .leader-card, .devotion-card, .leader-flip-card, .testimonial-card {
+      transition: box-shadow .25s, transform .18s, perspective .3s;
+      will-change: box-shadow, transform, perspective;
+    }
+    .card-tilt {
+      transform: perspective(600px) rotateY(var(--tiltX,0deg)) rotateX(var(--tiltY,0deg));
+    }
+    /* Social Media Icons */
+    .social-icons {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      margin-top: 2.2rem;
+    }
+    .social-icon {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e9f0ff 0%, #c7d2fe 100%);
+      box-shadow: 0 2px 8px rgba(31,87,255,.08);
+      transition: background .25s, transform .18s;
+      font-size: 1.3rem;
+      color: var(--primary-600);
+      cursor: pointer;
+    }
+    .social-icon:hover {
+      background: linear-gradient(135deg, #1f57ff 0%, #1743c9 100%);
+      color: #fff;
+      transform: scale(1.12);
+    }
+    /* Scripture Rotator */
+    .scripture-rotator {
+      font-size: 1.15rem;
+      color: var(--primary-600);
+      font-weight: 600;
+      margin-top: 1.2rem;
+      min-height: 2.2rem;
+      transition: opacity .5s;
+    }
+    /* Animated Hero Background */
+    .hero-animated-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(135deg, #e9f0ff 0%, #c7d2fe 100%);
+      overflow: hidden;
+    }
+    .hero-animated-bg svg {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      opacity: 0.7;
+      animation: bgWave 12s linear infinite alternate;
+    }
+    @keyframes bgWave {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-40px); }
+    }
+    /* Testimonials Section */
+    .testimonial-section {
+      background: linear-gradient(120deg, #e9f0ff 0%, #fff 100%);
+      padding: 80px 0;
+    }
+    .testimonial-card {
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px rgba(31,87,255,.10);
+      padding: 2.2rem 1.5rem;
+      margin-bottom: 2rem;
+      transition: box-shadow .25s, transform .18s;
+      will-change: box-shadow, transform;
+    }
+    .testimonial-card:hover {
+      box-shadow: 0 16px 40px rgba(31,87,255,.18);
+      transform: scale(1.03) translateY(-4px);
+    }
+    .testimonial-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 16px rgba(31,87,255,.10);
+    }
+    .testimonial-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: .2rem;
+    }
+    .testimonial-role {
+      color: var(--muted);
+      font-size: .98rem;
+      margin-bottom: .7rem;
+    }
+    .testimonial-text {
+      font-size: 1.08rem;
+      color: var(--ink);
+    }
+    /* Slide-in Mobile Navigation */
+    @media (max-width: 991.98px) {
+      .navbar-collapse {
+        position: fixed;
+        top: 0;
+        right: -100vw;
+        width: 80vw;
+        height: 100vh;
+        background: #fff;
+        box-shadow: 0 8px 32px rgba(31,87,255,.12);
+        transition: right .4s cubic-bezier(.4,0,.2,1);
+        z-index: 9999;
+        padding-top: 3.5rem;
+      }
+      .navbar-collapse.show {
+        right: 0;
+      }
+      .navbar-toggler {
+        z-index: 10000;
+      }
+    }
+    /* Scroll-to-top button */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 9999;
+      display: none;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      box-shadow: 0 6px 24px rgba(31,87,255,.18);
+      font-size: 1.7rem;
+      cursor: pointer;
+      transition: background .25s, box-shadow .25s, transform .18s;
+    }
+    #scrollTopBtn:hover {
+      background: var(--primary-600);
+      transform: scale(1.08);
+    }
+    /* Floating labels for forms */
+    .form-floating .form-control:focus ~ label,
+    .form-floating .form-control:not(:placeholder-shown) ~ label {
+      opacity: .85;
+      transform: scale(.95) translateY(-1.2rem) translateX(.1rem);
+      color: var(--primary-600);
+    }
+    .form-floating label {
+      transition: all .2s cubic-bezier(.4,0,.2,1);
+      opacity: .7;
+      pointer-events: none;
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+    /* Section divider waves */
+    .section-divider {
+      width: 100%;
+      height: 48px;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h1440v48H0V0z" fill="%23e9f0ff"/><path d="M0 24c120 0 240 24 360 24s240-24 360-24 240 24 360 24 240-24 360-24v48H0V24z" fill="%23fff"/></svg>') repeat-x;
+      background-size: cover;
+      margin-bottom: -2px;
+    }
+    /* Navbar shadow on scroll */
+    .navbar.scrolled {
+      box-shadow: 0 8px 32px rgba(31,87,255,.12);
+      transition: box-shadow .25s cubic-bezier(.4,0,.2,1);
+    }
+    /* Loading spinner for modal */
+    .spinner-border {
+      width: 2rem;
+      height: 2rem;
+      border-width: .25em;
+      color: var(--primary);
+    }
+    /* Accessibility improvements */
+    .btn:focus, .nav-link:focus, .form-control:focus {
+      outline: 2px solid var(--primary-600);
+      outline-offset: 2px;
+    }
+    .navbar-toggler:focus {
+      box-shadow: 0 0 0 .2rem var(--ring);
+    }
+    /* Button Animations & Transitions */
+    .btn, .btn-primary, .btn-outline-primary {
+      transition: background .25s cubic-bezier(.4,0,.2,1), color .25s cubic-bezier(.4,0,.2,1), box-shadow .25s cubic-bezier(.4,0,.2,1), transform .18s cubic-bezier(.4,0,.2,1);
+      box-shadow: 0 2px 8px rgba(31,87,255,.08);
+      will-change: background, color, box-shadow, transform;
+    }
+    .btn:hover, .btn:focus {
+      background: var(--primary-600) !important;
+      color: #fff !important;
+      box-shadow: 0 6px 24px rgba(31,87,255,.18);
+      transform: translateY(-2px) scale(1.04);
+    }
+    .btn:active {
+      background: var(--primary-100) !important;
+      color: var(--primary-600) !important;
+      box-shadow: 0 2px 8px rgba(31,87,255,.08);
+      transform: scale(.98);
+    }
+
+    /* Card Animations */
+    .feature-card, .ministry-card, .event-card, .leader-card, .devotion-card, .leader-flip-card {
+      transition: box-shadow .25s cubic-bezier(.4,0,.2,1), transform .18s cubic-bezier(.4,0,.2,1);
+    }
+    .feature-card:hover, .ministry-card:hover, .event-card:hover, .leader-card:hover, .devotion-card:hover, .leader-flip-card:hover {
+      box-shadow: 0 16px 40px rgba(31,87,255,.16);
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    /* Section Fade-in/Out Animation */
+    .section {
+      opacity: 0;
+      transform: translateY(60px) scale(.98);
+      transition: opacity .9s cubic-bezier(.4,0,.2,1), transform .9s cubic-bezier(.4,0,.2,1);
+      will-change: opacity, transform;
+    }
+    .section.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      animation: sectionIn .9s cubic-bezier(.4,0,.2,1);
+    }
+    .section.hide {
+      opacity: 0;
+      transform: translateY(-60px) scale(.98);
+      animation: sectionOut .7s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes sectionIn {
+      from { opacity:0; transform:translateY(60px) scale(.98); }
+      to { opacity:1; transform:translateY(0) scale(1); }
+    }
+    @keyframes sectionOut {
+      from { opacity:1; transform:translateY(0) scale(1); }
+      to { opacity:0; transform:translateY(-60px) scale(.98); }
+    }
+    /* Card In/Out Animation */
+    .feature-card, .ministry-card, .event-card, .leader-card, .devotion-card, .leader-flip-card, .testimonial-card {
+      opacity: 0;
+      transform: scale(.97) translateY(30px);
+      transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1);
+    }
+    .feature-card.show, .ministry-card.show, .event-card.show, .leader-card.show, .devotion-card.show, .leader-flip-card.show, .testimonial-card.show {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      animation: cardIn .7s cubic-bezier(.4,0,.2,1);
+    }
+    .feature-card.hide, .ministry-card.hide, .event-card.hide, .leader-card.hide, .devotion-card.hide, .leader-flip-card.hide, .testimonial-card.hide {
+      opacity: 0;
+      transform: scale(.97) translateY(-30px);
+      animation: cardOut .5s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes cardIn {
+      from { opacity:0; transform:scale(.97) translateY(30px); }
+      to { opacity:1; transform:scale(1) translateY(0); }
+    }
+    @keyframes cardOut {
+      from { opacity:1; transform:scale(1) translateY(0); }
+      to { opacity:0; transform:scale(.97) translateY(-30px); }
+    }
+
+    /* Navbar Brand Animation */
+    .navbar-brand {
+      transition: color .25s cubic-bezier(.4,0,.2,1), letter-spacing .25s cubic-bezier(.4,0,.2,1);
+    }
+    .navbar-brand:hover {
+      color: var(--primary);
+      letter-spacing: .03em;
+    }
+
+    /* Modal Animation */
+    .modal-content {
+      animation: modalFadeIn .5s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes modalFadeIn {
+      from { opacity:0; transform:scale(.95); }
+      to { opacity:1; transform:scale(1); }
+    }
+    /* Fix leader card size and layout */
+    .leader-flip-card {
+      width: 100%;
+      max-width: 340px;
+      min-width: 260px;
+      min-height: 380px;
+      height: 380px;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+    .leader-flip-inner {
+      height: 100%;
+    }
+    .leader-flip-front, .leader-flip-back {
+      min-height: 380px;
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.2rem 1.5rem;
+    }
+    @media (max-width: 991.98px) {
+      .leader-flip-card {
+        max-width: 100%;
+        min-width: 0;
+        height: 340px;
+        min-height: 340px;
+      }
+      .leader-flip-front, .leader-flip-back {
+        min-height: 340px;
+        height: 100%;
+        padding: 1.2rem .7rem;
+      }
+    }
+    /* Leader Flip Card Animation */
+    .leader-flip-card {
+      perspective: 1200px;
+      cursor: pointer;
+      min-height: 340px;
+      margin-bottom: 2.5rem;
+    }
+    .leader-flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s cubic-bezier(.4,0,.2,1);
+      transform-style: preserve-3d;
+    }
+    .leader-flip-card.flipped .leader-flip-inner {
+      transform: rotateY(180deg);
+    }
+    .leader-flip-front, .leader-flip-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: var(--card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.2rem 1.5rem;
+    }
+    .leader-flip-front img {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 4px 16px rgba(31,87,255,.10);
+    }
+    .leader-flip-front h5 {
+      margin-bottom: .3rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    .leader-flip-front small {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: .7rem;
+    }
+    .leader-flip-back {
+      transform: rotateY(180deg);
+      background: #f8faff;
+      color: var(--ink);
+      text-align: center;
+      justify-content: center;
+      font-size: 1.08rem;
+      padding: 2.2rem 1.5rem;
+    }
+    .leader-flip-back p {
+      margin-bottom: 0;
+    }
+    :root{
+      --primary:#1f57ff;          /* Royal-ish blue */
+      --primary-600:#1743c9;
+      --primary-100:#e9f0ff;
+      --ink:#0f172a;              /* Slate-900 */
+      --muted:#64748b;            /* Slate-500 */
+      --bg:#ffffff;               /* Pure white */
+      --ring:rgba(31,87,255,.35);
+      --card: #ffffff;
+      --shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+      --radius: 1.25rem;          /* 20px */
+    }
+
+  html, body{ font-family:'Gotham', 'Montserrat', 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--ink); background:var(--bg); scroll-behavior:smooth; }
+  h1, h2, h3, h4, h5, h6, .navbar-brand, .fw-bold, .fw-800 { font-family: 'Gotham', 'Montserrat', 'Poppins', sans-serif; }
+  p, .lead, .nav-link, .btn, .form-control, .feature-card, .ministry-card, .event-card, .leader-card, .devotion-card { font-family: 'Poppins', 'Montserrat', 'Gotham', sans-serif; }
+
+    /* Utility */
+    .btn-primary{ background:var(--primary); border-color:var(--primary); }
+    .btn-primary:hover{ background:var(--primary-600); border-color:var(--primary-600); }
+    .text-primary{ color:var(--primary) !important; }
+    .bg-primary-100{ background:var(--primary-100); }
+    .rounded-2xl{ border-radius: var(--radius); }
+    .shadow-soft{ box-shadow: var(--shadow); }
+    .ring-focus:focus{ box-shadow: 0 0 0 .25rem var(--ring); }
+    .section{ padding: 80px 0; }
+
+    /* Navbar */
+    .navbar{ box-shadow: 0 4px 20px rgba(2,6,23,.06); }
+    .navbar .nav-link{ font-weight:600; }
+    .navbar .nav-link.active{ color:var(--primary)!important; }
+
+    /* Hero */
+    .hero{ position:relative; overflow:hidden; }
+    .hero::after{ content:""; position:absolute; inset:0; background:radial-gradient(1200px 500px at 80% -10%, rgba(31,87,255,.15), transparent), radial-gradient(900px 400px at -10% 110%, rgba(31,87,255,.2), transparent); pointer-events:none; }
+    .hero-ill{
+      width:100%; height:100%; position:absolute; inset:0; background:linear-gradient(135deg, #ffffff 0%, #f7faff 100%);
+    }
+    .hero h1{ font-weight:800; letter-spacing:-.02em; }
+    .hero .lead{ color:var(--muted); font-size:1.125rem; }
+
+    /* Cards */
+    .feature-card, .ministry-card, .event-card, .leader-card, .devotion-card{
+      background:var(--card); border:1px solid #eef2ff; border-radius:var(--radius); box-shadow:var(--shadow); transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .feature-card:hover, .ministry-card:hover, .event-card:hover, .leader-card:hover, .devotion-card:hover{ transform: translateY(-4px); box-shadow: 0 16px 40px rgba(2, 6, 23, 0.12); }
+
+    /* Flip card for leaders */
+    .leader-flip{ perspective:1000px; }
+    .leader-inner{ position:relative; width:100%; height:100%; transform-style:preserve-3d; transition: transform .6s; }
+    .leader-flip:hover .leader-inner{ transform: rotateY(180deg); }
+    .leader-front, .leader-back{ position:absolute; inset:0; backface-visibility:hidden; border-radius:var(--radius); overflow:hidden; }
+    .leader-back{ transform: rotateY(180deg); background:#f8faff; display:flex; align-items:center; justify-content:center; padding:1rem; text-align:center; }
+
+    /* Section heads */
+    .eyebrow{ display:inline-block; padding:.35rem .7rem; background:var(--primary-100); color:var(--primary-600); font-weight:700; border-radius:999px; font-size:.8rem; letter-spacing:.04em; }
+
+    /* Timeline / schedule pills */
+    .schedule-pill{ background:#f1f5ff; color:#1e3a8a; border-radius:999px; padding:.5rem .9rem; font-weight:700; font-size:.95rem; border:1px dashed #bfd0ff; }
+
+    /* Giving */
+    .giving-tile{ border:1px dashed #c7d2fe; }
+
+    /* Footer */
+    footer{ background:#0b1220; color:#cdd6f4; }
+    footer a{ color:#dbe7ff; text-decoration:none; }
+    footer a:hover{ text-decoration:underline; }
+
+    /* Animations */
+    .fade-up{ opacity:0; transform: translateY(30px) scale(.98); transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1); will-change:opacity,transform; }
+    .fade-up.show{ opacity:1; transform: translateY(0) scale(1); }
+    .fade-out{ opacity:0 !important; transform: translateY(-30px) scale(.98) !important; transition: opacity .5s cubic-bezier(.4,0,.2,1), transform .5s cubic-bezier(.4,0,.2,1); }
+    .fade-in{ animation: fadeIn .8s cubic-bezier(.4,0,.2,1) both; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(30px) scale(.98);} to { opacity:1; transform:translateY(0) scale(1);} }
+    @keyframes fadeOut { from { opacity:1; transform:translateY(0) scale(1);} to { opacity:0; transform:translateY(-30px) scale(.98);} }
+
+    /* Improved Spacing & UI */
+    .section {
+      padding: 60px 0 50px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .container {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1100px;
+      width: 100%;
+      padding-left: 24px;
+      padding-right: 24px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  .row.g-4, .row.g-3{ row-gap: 2rem; justify-content: center; }
+    .mb-3, .mb-4, .mb-5{ margin-bottom:2.2rem!important; }
+    .mt-2, .mt-3, .mt-4, .mt-5{ margin-top:2.2rem!important; }
+    .feature-card, .ministry-card, .event-card, .leader-card, .devotion-card{
+      padding: 1.5rem 1rem;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 420px;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .navbar{ padding-top:1.2rem; padding-bottom:1.2rem; }
+    .navbar .nav-link{ margin-right:1.2rem; font-size:1.08rem; }
+    .navbar .btn{ margin-left:1.2rem; }
+    .church-logo-box{ margin-right:1.1rem!important; }
+    .eyebrow{ margin-bottom:1.1rem; }
+    .form-control, .btn{ font-size:1.08rem; }
+    .btn-lg{ padding:.85rem 2.2rem; font-size:1.15rem; }
+    .rounded-2xl{ border-radius: 1.5rem; }
+    .shadow-soft{ box-shadow: 0 12px 36px rgba(2, 6, 23, 0.10); }
+    .feature-card img, .ministry-card img, .event-card img, .leader-card img, .devotion-card img{
+      margin-bottom: 1rem;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .modal-content{ padding:2.2rem 1.5rem; }
+    @media (max-width: 767.98px){
+      .section{ padding: 60px 0 50px 0; }
+      .feature-card, .ministry-card, .event-card, .leader-card, .devotion-card{ padding:1.2rem .7rem; }
+      .navbar .nav-link{ margin-right:.5rem; }
+      .navbar .btn{ margin-left:.5rem; }
+    }
+
+    /* Forms */
+    .form-control{ border-radius:.9rem; padding:.75rem 1rem; }
+    .form-control:focus{ border-color:var(--primary); box-shadow:0 0 0 .2rem rgba(31,87,255,.15); }
+
+    /* Responsive tweaks */
+    @media (max-width: 991.98px){
+      .navbar .nav-link, .navbar .btn {
+        font-size: 1rem;
+        height: 48px;
+        padding: 0.5rem 1rem;
+      }
+      .navbar-brand span {
+        font-size: 1.1rem !important;
+      }
+      .church-logo-box {
+        width: 68px !important;
+        height: 68px !important;
+      }
+      .church-logo-box img {
+        width: 54px !important;
+        height: 54px !important;
+      }
+      @media (max-width: 991.98px) {
+        .church-logo-box {
+          width: 48px !important;
+          height: 48px !important;
+        }
+        .church-logo-box img {
+          width: 38px !important;
+          height: 38px !important;
+        }
+      }
+      @media (max-width: 575.98px) {
+        .church-logo-box {
+          width: 38px !important;
+          height: 38px !important;
+        }
+        .church-logo-box img {
+          width: 28px !important;
+          height: 28px !important;
+        }
+      }
+      .section {
+        padding: 60px 0 50px 0;
+      }
+      .feature-card, .ministry-card, .event-card, .leader-card, .devotion-card {
+        padding: 1.2rem .7rem;
+      }
+      .row.g-4, .row.g-3 {
+        row-gap: 1.2rem;
+      }
+      .mb-3, .mb-4, .mb-5 {
+        margin-bottom: 1.2rem !important;
+      }
+      .mt-2, .mt-3, .mt-4, .mt-5 {
+        margin-top: 1.2rem !important;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .leader-flip-front img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg bg-white sticky-top py-3" aria-label="Main Navigation">
+    <div class="container-fluid px-lg-5">
+      <div class="d-flex align-items-center w-100" style="min-height:64px;">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="#home" style="gap:1.1rem;">
+          <div class="church-logo-box d-flex align-items-center justify-content-center" style="width:68px;height:68px;background:#e9f0ff;border-radius:50%;box-shadow:0 2px 8px rgba(31,87,255,.08);overflow:hidden;">
+            <!-- PLACE YOUR LOGO IMAGE BELOW -->
+            <img src="../Church Website/img/logo.png" alt="Church Logo" style="width:54px;height:54px;object-fit:contain;display:block;" />
+          </div>
+          <span style="font-size:1.35rem;line-height:1;">JLLI Church</span>
+        </a>
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold align-items-center" style="gap:0.5rem;">
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#ministries">Ministries</a></li>
+            <li class="nav-item"><a class="nav-link" href="#leaders">Leaders</a></li>
+            <li class="nav-item"><a class="nav-link" href="#sermons">Sermons</a></li>
+            <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            <li class="nav-item"><a class="btn btn-primary px-3" href="#visit" style="margin-left:1.2rem;">Plan a Visit</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <button id="scrollTopBtn" aria-label="Scroll to top" title="Back to top">↑</button>
+  <header id="home" class="hero position-relative">
+    <div class="hero-animated-bg">
+      <svg viewBox="0 0 1440 320"><path fill="#1f57ff" fill-opacity=".08" d="M0,160L60,176C120,192,240,224,360,229.3C480,235,600,213,720,186.7C840,160,960,128,1080,117.3C1200,107,1320,117,1380,122.7L1440,128L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path></svg>
+    </div>
+    <div class="hero-ill"></div>
+    <div class="container position-relative" style="z-index:2">
+      <div class="row align-items-center min-vh-75 py-5">
+        <div class="col-lg-7">
+          <span class="eyebrow mb-3">Welcome Home</span>
+          <h1 class="display-5 fw-800 mb-3">Jesus My Lamp & Light Inc. Church</h1>
+          <p class="lead mb-4">A Christ-centered community in faith, worship, and service. Join us this Sunday and be part of what God is doing.</p>
+          <div class="d-flex gap-2">
+            <a href="#sermons" class="btn btn-primary btn-lg ring-focus">Watch Sermons</a>
+            <a href="#ministries" class="btn btn-outline-primary btn-lg">Get Involved</a>
+          </div>
+          <div class="d-flex gap-3 mt-4 flex-wrap">
+            <span class="schedule-pill">Sunday Worship 8:00 AM</span>
+            <span class="schedule-pill">Midweek Worship Wed 6:00 PM</span>
+            <span class="schedule-pill">Morning Prayer Sat 8:00 AM</span>
+          </div>
+        </div>
+        <div class="col-lg-5 mt-5 mt-lg-0">
+          <div class="feature-card p-4 rounded-2xl text-center">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop" alt="Cross Church" class="img-fluid rounded-2xl mb-3"/>
+            <div class="scripture-rotator mb-3" id="scriptureRotator" style="margin-bottom:1.5rem; margin-top:-0.5rem;">“Your word is a lamp to my feet and a light to my path.” — Psalm 119:105</div>
+            <a href="https://www.facebook.com/share/17QxiDaaDz/" target="_blank" class="btn btn-outline-primary w-100 mt-2">Request a Prayer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="section-divider"></div>
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+          <span class="eyebrow">About Us</span>
+          <h2 class="mt-2 mb-3 fw-bold">Our Story, Mission & Beliefs</h2>
+          <p class="text-secondary">We are a Bible-believing church committed to knowing Christ and making Him known. Our heart is to worship God, disciple believers, and serve our community through prayer, compassion, and outreach.</p>
+          <div class="row g-3 mt-3">
+            <div class="col-md-6">
+              <div class="feature-card p-3 h-100">
+                <h6 class="mb-1">Mission</h6>
+                <p class="mb-0 small text-secondary">To lead people into a growing relationship with Jesus and equip them for ministry.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="feature-card p-3 h-100">
+                <h6 class="mb-1">Vision</h6>
+                <p class="mb-0 small text-secondary">A Spirit-empowered church that shines God’s light in families and the nations.</p>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="feature-card p-3 h-100">
+                <h6 class="mb-1">Core Beliefs</h6>
+                <ul class="mb-0 small text-secondary">
+                  <li>Authority of Scripture</li>
+                  <li>Salvation by grace through faith in Jesus Christ</li>
+                  <li>Life in the Spirit, prayer, and discipleship</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img class="img-fluid rounded-2xl shadow-soft" src="https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1400&auto=format&fit=crop" alt="Church Building"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+  <!-- MINISTRIES -->
+  <section id="ministries" class="section bg-primary-100">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="text-center mb-5">
+            <span class="eyebrow">Ministries</span>
+            <h2 class="mt-2 fw-bold">Find Your Place to Serve</h2>
+            <p class="text-secondary">Be part of a ministry family—grow, serve, and build together.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <!-- Use data-ministry attribute to enable future filtering -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 d-flex align-items-stretch justify-content-center">
+          <div class="ministry-card w-100 h-100 d-flex flex-column justify-content-between text-center mx-auto">
+            <span class="ministry-icon"><i class="bi bi-music-note-beamed"></i></span>
+            <h5 class="fw-bold">Praise & Worship</h5>
+            <p class="mb-2 text-secondary">Leading the church into God’s presence through music and praise.</p>
+            <span class="badge text-bg-primary">Auditions Open</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 d-flex align-items-stretch justify-content-center">
+          <div class="ministry-card w-100 h-100 d-flex flex-column justify-content-between text-center mx-auto">
+            <span class="ministry-icon"><i class="bi bi-heart-fill"></i></span>
+            <h5 class="fw-bold">Prayer Intercessory</h5>
+            <p class="mb-2 text-secondary">Standing in the gap for our church, city, and nation.</p>
+            <span class="badge text-bg-primary">Saturdays</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 d-flex align-items-stretch justify-content-center">
+          <div class="ministry-card w-100 h-100 d-flex flex-column justify-content-between text-center mx-auto">
+            <span class="ministry-icon"><i class="bi bi-book-half"></i></span>
+            <h5 class="fw-bold">Teacher's Ministry</h5>
+            <p class="mb-2 text-secondary">Teaching sound doctrine to ground believers in the Word.</p>
+            <span class="badge text-bg-primary">Open to all</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 d-flex align-items-stretch justify-content-center">
+          <div class="ministry-card w-100 h-100 d-flex flex-column justify-content-between text-center mx-auto">
+            <span class="ministry-icon"><i class="bi bi-person-badge"></i></span>
+            <h5 class="fw-bold">Men's Ministry</h5>
+            <p class="mb-2 text-secondary">Equipping men to lead with Christ-like character.</p>
+            <span class="badge text-bg-primary">Monthly</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 d-flex align-items-stretch justify-content-center">
+          <div class="ministry-card w-100 h-100 d-flex flex-column justify-content-between text-center mx-auto">
+            <span class="ministry-icon"><i class="bi bi-person-hearts"></i></span>
+            <h5 class="fw-bold">Women's Ministry</h5>
+            <p class="mb-2 text-secondary">Encouraging women in faith, family, and fellowship.</p>
+            <span class="badge text-bg-primary">Monthly</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 d-flex align-items-stretch justify-content-center">
+          <div class="ministry-card w-100 h-100 d-flex flex-column justify-content-between text-center mx-auto">
+            <span class="ministry-icon"><i class="bi bi-sunrise"></i></span>
+            <h5 class="fw-bold">Morning Prayer</h5>
+            <p class="mb-2 text-secondary">Join us every Saturday at 8:00 AM for a powerful time of prayer and fellowship.</p>
+            <span class="badge text-bg-primary">Saturdays 8:00 AM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+  <!-- LEADERS -->
+  <section id="leaders" class="section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="eyebrow">Leaders</span>
+        <h2 class="mt-2 fw-bold">Meet Our Pastors & Ministry Heads</h2>
+        <p class="text-secondary">Click each card to flip and see more about our leaders.</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="leader-flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="leader-flip-inner">
+              <div class="leader-flip-front">
+                <img src="../Church Website/img/pasrudy.jpeg" alt="Senior Pastor" />
+                <h5>Ptr. Rodolfo Soriano Corpus</h5>
+                <small>Senior Pastor</small>
+              </div>
+              <div class="leader-flip-back">
+                <p>Ptr. Rodolfo Soriano Corpus is a visionary leader and faithful servant of God. With a heart for discipleship, church growth, and community outreach, he preaches the Word with conviction and compassion, guiding the church to fulfill its mission in Christ.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="leader-flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="leader-flip-inner">
+              <div class="leader-flip-front">
+                <img src="../Church Website/img/luz.jpg" alt="Senior Pastor's Wife" />
+                <h5>Sis. Luz Corpus</h5>
+                <small>Senior Pastor's Wife</small>
+              </div>
+              <div class="leader-flip-back">
+                <p>A devoted wife to Ptr. Rodolfo Soriano Corpus, Sis. Luz is a pillar of faith and encouragement. She exemplifies godly character, supports the church with wisdom and compassion, and inspires women to grow in Christ and serve their families.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="leader-flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="leader-flip-inner">
+              <div class="leader-flip-front">
+                <img src="../Church Website/img/edwin.jpg" alt="Pastor" />
+                <h5>Ptr. Edwin Tamayo</h5>
+                <small>Pastor</small>
+              </div>
+              <div class="leader-flip-back">
+                <p>Ptr. Edwin Tamayo is a passionate preacher and shepherd, dedicated to teaching the Word and caring for the congregation. He leads with integrity, prayer, and a heart for discipleship, helping believers deepen their walk with God.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+  <!-- SERMONS -->
+  <section id="sermons" class="section bg-primary-100">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="eyebrow">Sermons</span>
+        <h2 class="mt-2 fw-bold">Watch & Grow in the Word</h2>
+        <p class="text-secondary">Catch up on the latest preaching. Search by title or preacher.</p>
+      </div>
+      <div class="row mb-4">
+        <div class="col-md-8 mx-auto">
+          <input id="sermonSearch" type="search" class="form-control" placeholder="Search sermons (e.g., faith, Ptr. Juan, hope)..." />
+        </div>
+      </div>
+      <div id="sermonList" class="row g-4">
+        <!-- Sermon cards populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+  <!-- EVENTS -->
+  <section id="events" class="section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="eyebrow">Events</span>
+        <h2 class="mt-2 fw-bold">What’s Happening</h2>
+        <p class="text-secondary">Mark your calendars and bring a friend!</p>
+      </div>
+      <div id="eventList" class="row g-4">
+        <!-- Events populated by JS -->
+      </div>
+    </div>
+  </section>
+
+
+  <div class="section-divider"></div>
+  <!-- PLAN A VISIT -->
+  <section id="visit" class="section">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <span class="eyebrow">Plan a Visit</span>
+          <h2 class="mt-2 fw-bold">We’d love to meet you!</h2>
+          <p class="text-secondary">Services every Sunday at 9:30 AM. We’re friendly, family-oriented, and excited to welcome you.</p>
+          <ul class="mb-4">
+            <li>Kids & Youth programs available</li>
+            <li>Parking & ushers ready to assist</li>
+            <li>Casual & comfortable atmosphere</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Get Directions</a>
+        </div>
+        <div class="col-lg-6 d-flex align-items-center justify-content-center">
+          <div class="feature-card p-4 rounded-2xl text-center w-100">
+            <h4 class="fw-bold mb-3 text-primary">We can't wait to meet you!</h4>
+            <p class="mb-3 text-secondary">Our team is ready to welcome you, answer your questions, and help you feel at home. Whether you're new to church or just visiting, you'll find a friendly face and a place to belong.</p>
+            <ul class="list-unstyled mb-4">
+              <li class="mb-2"><i class="bi bi-people me-2 text-primary"></i> Greeters & Ushers to assist you</li>
+              <li class="mb-2"><i class="bi bi-cup-hot me-2 text-primary"></i> Free coffee & snacks after service</li>
+              <li class="mb-2"><i class="bi bi-chat-dots me-2 text-primary"></i> Prayer & conversation available</li>
+            </ul>
+            <a href="https://www.facebook.com/share/17QxiDaaDz/" target="_blank" class="btn btn-primary btn-lg">
+              <i class="bi bi-facebook me-2"></i> Connect with Us on Facebook
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+  <!-- CONTACT -->
+  <section id="contact" class="section bg-primary-100">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="eyebrow">Contact</span>
+        <h2 class="mt-2 fw-bold">We’re here for you</h2>
+        <p class="text-secondary">Questions? Need prayer? Send us a message.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="feature-card p-4 h-100">
+            <div class="d-flex flex-column align-items-center justify-content-center h-100">
+              <p class="mb-4 fw-semibold text-secondary">For inquiries or prayer requests, connect with us directly on Facebook.</p>
+              <a href="https://www.facebook.com/share/17QxiDaaDz/" target="_blank" class="btn btn-primary btn-lg" style="min-width:220px;">
+                <i class="bi bi-facebook me-2"></i> Message Us on Facebook
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="feature-card p-0 h-100 overflow-hidden">
+            <iframe title="Church Location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3879.0000000000005!2d121.0471142!3d14.7019025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b1cac578dce3%3A0xe91c1c4c7d34c1bf!2sJesus%2C%20My%20Lamp%20%26%20Light%2C%20Inc.%20-%20Church!5e0!3m2!1sen!2sph!4v1693760000000!5m2!1sen!2sph" style="border:0; width:100%; height:350px; min-height:200px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonial-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="eyebrow">Testimonials</span>
+        <h2 class="mt-2 fw-bold">Lives Changed</h2>
+        <p class="text-secondary">Hear from our members and guests about their experience at JLLI Church.</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+          <div class="testimonial-card text-center">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Testimonial" class="testimonial-avatar" />
+            <div class="testimonial-name">Maria Santos</div>
+            <div class="testimonial-role">Member</div>
+            <div class="testimonial-text">“JLLI Church is truly a family. I found hope, healing, and lifelong friends here.”</div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="testimonial-card text-center">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Testimonial" class="testimonial-avatar" />
+            <div class="testimonial-name">Carlo Reyes</div>
+            <div class="testimonial-role">Youth</div>
+            <div class="testimonial-text">“The youth ministry changed my life. I’m growing in faith and leadership every week.”</div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="testimonial-card text-center">
+            <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Testimonial" class="testimonial-avatar" />
+            <div class="testimonial-name">Edwin Tamayo</div>
+            <div class="testimonial-role">Pastor</div>
+            <div class="testimonial-text">“It’s a joy to serve and see lives transformed by God’s Word and love.”</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- FOOTER -->
+  <footer class="pt-5 pb-4">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-6">
+          <h5 class="mb-2">Jesus My Lamp & Light Inc. Church</h5>
+          <p class="mb-2">Quezon City, Philippines</p>
+          <p class="small text-muted mb-0">Sunday Service 9:30 AM • Midweek Prayer Wed 7:00 PM • Youth Fri 6:30 PM</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <a class="me-3" href="#sermons">Sermons</a>
+          <a class="me-3" href="#events">Events</a>
+          <a class="me-3" href="#ministries">Ministries</a>
+          <a href="#contact">Contact</a>
+          <div class="mt-3 small text-muted">© <span id="year"></span> JLLI Church. All rights reserved.</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PRAYER REQUEST MODAL REMOVED: Button now links to Facebook page directly -->
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <script>
+    // Enhanced Intersection Observer for in/out transitions
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach((e)=>{
+        if(e.isIntersecting){
+          e.target.classList.add('show');
+          e.target.classList.remove('hide');
+        } else {
+          e.target.classList.remove('show');
+          e.target.classList.add('hide');
+        }
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.section, .feature-card, .ministry-card, .event-card, .leader-card, .devotion-card, .leader-flip-card, .testimonial-card').forEach(el=>{
+      el.classList.add('hide');
+      observer.observe(el);
+    });
+    // Button Ripple Effect
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.left = `${e.offsetX}px`;
+        ripple.style.top = `${e.offsetY}px`;
+        ripple.style.width = ripple.style.height = Math.max(btn.offsetWidth, btn.offsetHeight) + 'px';
+        btn.appendChild(ripple);
+        ripple.addEventListener('animationend', () => ripple.remove());
+      });
+    });
+    // Card Tilt Effect
+    document.querySelectorAll('.feature-card, .ministry-card, .event-card, .leader-card, .devotion-card, .leader-flip-card, .testimonial-card').forEach(card => {
+      card.addEventListener('mousemove', function(e) {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const tiltX = ((x / rect.width) - 0.5) * 10;
+        const tiltY = ((y / rect.height) - 0.5) * -10;
+        card.style.setProperty('--tiltX', tiltX + 'deg');
+        card.style.setProperty('--tiltY', tiltY + 'deg');
+        card.classList.add('card-tilt');
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.setProperty('--tiltX', '0deg');
+        card.style.setProperty('--tiltY', '0deg');
+        card.classList.remove('card-tilt');
+      });
+    });
+    // Typing Animation for Scripture Rotator
+    const scriptures = [
+      '“Your word is a lamp to my feet and a light to my path.” — Psalm 119:105',
+      '“For I know the plans I have for you, declares the Lord.” — Jeremiah 29:11',
+      '“The Lord is my shepherd; I shall not want.” — Psalm 23:1',
+      '“I can do all things through Christ who strengthens me.” — Philippians 4:13',
+      '“Trust in the Lord with all your heart.” — Proverbs 3:5',
+      '“Let everything that has breath praise the Lord.” — Psalm 150:6'
+    ];
+    let scriptureIdx = 0;
+    let typingTimeout;
+    function typeScripture(text, el, i = 0) {
+      if (i === 0) el.textContent = '';
+      if (i < text.length) {
+        el.textContent += text.charAt(i);
+        typingTimeout = setTimeout(() => typeScripture(text, el, i + 1), 28);
+      }
+    }
+    function showNextScripture() {
+      const rotator = document.getElementById('scriptureRotator');
+      if (!rotator) return;
+      typeScripture(scriptures[scriptureIdx], rotator);
+      scriptureIdx = (scriptureIdx + 1) % scriptures.length;
+    }
+    showNextScripture();
+    setInterval(() => {
+      showNextScripture();
+    }, 5200);
+    // Parallax reveal for sections
+    document.querySelectorAll('.section').forEach(section => {
+      window.addEventListener('scroll', () => {
+        const rect = section.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 80) {
+          section.style.transform = 'translateY(0)';
+          section.style.opacity = '1';
+        }
+      });
+    });
+    // Scroll-to-top button logic
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', function(){
+      if(window.scrollY > 300){ scrollBtn.style.display = 'block'; }
+      else{ scrollBtn.style.display = 'none'; }
+    });
+    scrollBtn.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+    // Navbar shadow on scroll
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', function(){
+      if(window.scrollY > 40){ navbar.classList.add('scrolled'); }
+      else{ navbar.classList.remove('scrolled'); }
+    });
+    // Current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+
+    // Activate nav links on scroll
+    const sections = document.querySelectorAll('section, header.hero');
+    const navLinks = document.querySelectorAll('.navbar .nav-link');
+    window.addEventListener('scroll', ()=>{
+      let current = '';
+      sections.forEach(sec=>{
+        const secTop = sec.offsetTop - 120;
+        if(scrollY >= secTop){ current = '#' + (sec.id || 'home'); }
+      });
+      navLinks.forEach(a=>{
+        a.classList.remove('active');
+        if(a.getAttribute('href') === current){ a.classList.add('active'); }
+      });
+    });
+
+    // Dummy Sermon Data
+    const sermons = [
+      {title:'Faith Over Fear', preacher:'Ptr. Juan Dela Cruz', date:'2025-08-18', embed:'https://www.youtube.com/embed/ysz5S6PUM-U'},
+      {title:'Walking in the Light', preacher:'Sis. Maria Santos', date:'2025-07-28', embed:'https://www.youtube.com/embed/jfKfPfyJRdk'},
+      {title:'Hope in Hard Times', preacher:'Bro. Carlo Reyes', date:'2025-06-15', embed:'https://www.youtube.com/embed/aqz-KE-bpKQ'}
+    ];
+
+    const sermonList = document.getElementById('sermonList');
+    function renderSermons(list){
+      sermonList.innerHTML = list.map(s=>`
+        <div class="col-md-6 col-lg-4">
+          <div class="devotion-card p-3 h-100">
+            <div class="ratio ratio-16x9 rounded-2xl overflow-hidden mb-3">
+              <iframe src="${s.embed}" title="${s.title}" allowfullscreen></iframe>
+            </div>
+            <h6 class="mb-1">${s.title}</h6>
+            <small class="text-secondary">${new Date(s.date).toLocaleDateString()} • ${s.preacher}</small>
+          </div>
+        </div>
+      `).join('');
+    }
+    renderSermons(sermons);
+
+    document.getElementById('sermonSearch').addEventListener('input', (e)=>{
+      const q = e.target.value.toLowerCase();
+      const filtered = sermons.filter(s => s.title.toLowerCase().includes(q) || s.preacher.toLowerCase().includes(q));
+      renderSermons(filtered);
+    });
+
+    // Dummy Events
+    const events = [
+      {title:'Church Anniversary', date:'2025-09-21', time:'9:30 AM', venue:'Main Sanctuary', desc:'Celebrate God’s faithfulness with us!', tag:'Special'},
+      {title:'Water Baptism', date:'2025-10-05', time:'2:00 PM', venue:'Community Pool', desc:'Public declaration of faith. Sign up now.', tag:'Baptism'},
+      {title:'Prayer & Fasting Week', date:'2025-11-11', time:'7:00 PM', venue:'Prayer Room', desc:'Seeking God together for breakthroughs.', tag:'Prayer'}
+    ];
+
+    const eventList = document.getElementById('eventList');
+    function renderEvents(){
+      eventList.innerHTML = events.map(ev => `
+        <div class="col-md-6 col-lg-4">
+          <div class="event-card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="mb-0">${ev.title}</h5>
+              <span class="badge text-bg-primary">${ev.tag}</span>
+            </div>
+            <p class="mb-2 text-secondary">${ev.desc}</p>
+            <div class="small">
+              <div><strong>Date:</strong> ${new Date(ev.date).toLocaleDateString()}</div>
+              <div><strong>Time:</strong> ${ev.time}</div>
+              <div><strong>Venue:</strong> ${ev.venue}</div>
+            </div>
+            <button class="btn btn-outline-primary btn-sm mt-3" onclick="alert('Registered! See you at ${ev.title}.')">Register</button>
+          </div>
+        </div>
+      `).join('');
+    }
+    renderEvents();
+
+    // Contact form validation (client-side only)
+    (function(){
+      const form = document.getElementById('contactForm');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        if(!form.checkValidity()){
+          form.classList.add('was-validated');
+          return;
+        }
+        alert('Thank you! We have received your message.');
+        form.reset();
+        form.classList.remove('was-validated');
+      });
+    })();
+
+    // Prayer request form validation with spinner
+    (function(){
+      const form = document.getElementById('prayerForm');
+      const spinner = document.getElementById('prayerSpinner');
+      const submitBtn = document.getElementById('prayerSubmitBtn');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        if(!form.checkValidity()){
+          form.classList.add('was-validated');
+          return;
+        }
+        submitBtn.disabled = true;
+        spinner.style.display = 'inline-block';
+        setTimeout(function(){
+          alert('Your prayer request has been submitted. Our intercessors will pray for you.');
+          form.reset();
+          form.classList.remove('was-validated');
+          submitBtn.disabled = false;
+          spinner.style.display = 'none';
+          const modal = bootstrap.Modal.getInstance(document.getElementById('prayerModal'));
+          modal.hide();
+        }, 1200);
+      });
+    })();
+  </script>
+</body>
+</html>
